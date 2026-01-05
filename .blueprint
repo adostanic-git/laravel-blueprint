@@ -1,0 +1,22 @@
+created:
+    - database/factories/ProizvodFactory.php
+    - database/factories/KupacFactory.php
+    - database/factories/DobavljacFactory.php
+    - database/factories/NarudzbinaFactory.php
+    - database/factories/StavkaNarudzbineFactory.php
+    - database/migrations/2026_01_05_214353_create_proizvods_table.php
+    - database/migrations/2026_01_05_214354_create_kupacs_table.php
+    - database/migrations/2026_01_05_214355_create_dobavljacs_table.php
+    - database/migrations/2026_01_05_214356_create_narudzbinas_table.php
+    - database/migrations/2026_01_05_214357_create_stavka_narudzbines_table.php
+    - app/Models/Proizvod.php
+    - app/Models/Kupac.php
+    - app/Models/Dobavljac.php
+    - app/Models/Narudzbina.php
+    - app/Models/StavkaNarudzbine.php
+models:
+    Proizvod: { naziv: string, opis: text, cena: 'decimal:8,2', kolicina_na_stanju: integer, timestamps: timestamps }
+    Kupac: { ime: string, prezime: string, email: string, telefon: string, adresa: string, timestamps: timestamps }
+    Dobavljac: { naziv: string, kontakt_osoba: string, telefon: string, email: string, timestamps: timestamps }
+    Narudzbina: { kupac_id: foreign, ukupan_iznos: 'decimal:10,2', status: string, timestamps: timestamps }
+    StavkaNarudzbine: { narudzbina_id: foreign, proizvod_id: foreign, kolicina: integer, cena: 'decimal:8,2', timestamps: timestamps }

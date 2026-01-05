@@ -1,0 +1,35 @@
+models:
+  Proizvod:
+    naziv: string
+    opis: text
+    cena: decimal:8,2
+    kolicina_na_stanju: integer
+    timestamps: true
+
+  Kupac:
+    ime: string
+    prezime: string
+    email: string
+    telefon: string
+    adresa: string
+    timestamps: true
+
+  Dobavljac:
+    naziv: string
+    kontakt_osoba: string
+    telefon: string
+    email: string
+    timestamps: true
+
+  Narudzbina:
+    kupac_id: foreign
+    ukupan_iznos: decimal:10,2
+    status: string
+    timestamps: true
+
+  StavkaNarudzbine:
+    narudzbina_id: foreign
+    proizvod_id: foreign
+    kolicina: integer
+    cena: decimal:8,2
+    timestamps: true
