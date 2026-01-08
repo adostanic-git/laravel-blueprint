@@ -39,4 +39,7 @@ class Narudzbina extends Model
     {
         return $this->belongsTo(Kupac::class);
     }
+
+
+
 }

@@ -26,6 +26,8 @@ Route::get('/prodavnica/{id}', [ProdavnicaController::class, 'show'])
 Route::get('/korpa', [KorpaController::class, 'index'])
     ->name('korpa.index');
 
+Route::post('/korpa/poruci', [KorpaController::class, 'poruci'])->name('korpa.poruci');
+
 Route::post('/korpa/dodaj/{id}', [KorpaController::class, 'dodaj'])
     ->name('korpa.add');
 
@@ -52,6 +54,10 @@ Route::middleware(['auth', 'verified'])->group(function () {
         ->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])
         ->name('profile.destroy');
+
+    Route::get('/izvestaji', function () {
+        return view('izvestaji.index');
+    })->name('izvestaji')->middleware('auth');
 
     // CRUD rute
     Route::resource('/kupci', KupacController::class);

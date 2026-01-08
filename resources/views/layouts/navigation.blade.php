@@ -38,9 +38,9 @@
                     <x-nav-link href="/korpa" :active="request()->is('korpa*')">
                         Korpa
                     </x-nav-link>
-                    
-                    <x-nav-link :href="route('dashboard')" :active="false">
-                        Izveštaj
+
+                    <x-nav-link href="/izvestaji" :active="request()->is('izvestaji*')">
+                        Izveštaji
                     </x-nav-link>
                 </div>
             </div>
