@@ -16,9 +16,6 @@ class KupacController extends Controller
         return view('kupci.index', compact('kupci'));
     }
 
-    /**
-     * Show the form for creating a new resource.
-     */
     public function create()
     {
         return view('kupci.create');
@@ -79,12 +76,13 @@ class KupacController extends Controller
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(Kupac $kupac)
+    public function destroy($id)
     {
+        $kupac = Kupac::findOrFail($id);
         $kupac->delete();
 
         return redirect()
             ->route('kupci.index')
-            ->with('success', 'Kupac je obrisan.');
+            ->with('success', 'Kupac je uspešno obrisan.');
     }
 }

@@ -2,45 +2,54 @@
     <!-- Session Status -->
     <x-auth-session-status class="mb-4" :status="session('status')" />
 
-    <form method="POST" action="{{ route('login') }}">
+    <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Dodaj novog kupca</h1>
+
+    <form method="POST" action="{{ route('kupci.store') }}">
         @csrf
 
-        <!-- Email Address -->
-        <div>
+        <!-- Ime -->
+        <div class="mt-4">
+            <x-input-label for="ime" :value="__('Ime')" />
+            <x-text-input id="ime" class="block mt-1 w-full" type="text" name="ime" :value="old('ime')" required autofocus />
+            <x-input-error :messages="$errors->get('ime')" class="mt-2" />
+        </div>
+
+        <!-- Prezime -->
+        <div class="mt-4">
+            <x-input-label for="prezime" :value="__('Prezime')" />
+            <x-text-input id="prezime" class="block mt-1 w-full" type="text" name="prezime" :value="old('prezime')" required />
+            <x-input-error :messages="$errors->get('prezime')" class="mt-2" />
+        </div>
+
+        <!-- Email -->
+        <div class="mt-4">
             <x-input-label for="email" :value="__('Email')" />
-            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required autofocus autocomplete="username" />
+            <x-text-input id="email" class="block mt-1 w-full" type="email" name="email" :value="old('email')" required />
             <x-input-error :messages="$errors->get('email')" class="mt-2" />
         </div>
 
-        <!-- Password -->
+        <!-- Telefon -->
         <div class="mt-4">
-            <x-input-label for="password" :value="__('Password')" />
-
-            <x-text-input id="password" class="block mt-1 w-full"
-                            type="password"
-                            name="password"
-                            required autocomplete="current-password" />
-
-            <x-input-error :messages="$errors->get('password')" class="mt-2" />
+            <x-input-label for="telefon" :value="__('Telefon')" />
+            <x-text-input id="telefon" class="block mt-1 w-full" type="text" name="telefon" :value="old('telefon')" required />
+            <x-input-error :messages="$errors->get('telefon')" class="mt-2" />
         </div>
 
-        <!-- Remember Me -->
-        <div class="block mt-4">
-            <label for="remember_me" class="inline-flex items-center">
-                <input id="remember_me" type="checkbox" class="rounded border-gray-300 text-indigo-600 shadow-sm focus:ring-indigo-500" name="remember">
-                <span class="ms-2 text-sm text-gray-600">{{ __('Remember me') }}</span>
-            </label>
+        <!-- Adresa -->
+        <div class="mt-4">
+            <x-input-label for="adresa" :value="__('Adresa')" />
+            <x-text-input id="adresa" class="block mt-1 w-full" type="text" name="adresa" :value="old('adresa')" required />
+            <x-input-error :messages="$errors->get('adresa')" class="mt-2" />
         </div>
 
-        <div class="flex items-center justify-end mt-4">
-            @if (Route::has('password.request'))
-                <a class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" href="{{ route('password.request') }}">
-                    {{ __('Forgot your password?') }}
-                </a>
-            @endif
+        <!-- Dugmad -->
+        <div class="flex items-center justify-end mt-6">
+            <a href="{{ route('kupci.index') }}" class="underline text-sm text-gray-600 hover:text-gray-900 rounded-md focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500">
+                Nazad
+            </a>
 
             <x-primary-button class="ms-3">
-                {{ __('Log in') }}
+                {{ __('Dodaj kupca') }}
             </x-primary-button>
         </div>
     </form>

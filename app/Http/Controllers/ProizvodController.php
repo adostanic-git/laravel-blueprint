@@ -32,15 +32,17 @@ class ProizvodController extends Controller
         // Validacija podataka
         $request->validate([
             'naziv' => 'required|string|max:255',
+            'opis' => 'required|string|max:255',
             'cena' => 'required|numeric|min:0',
-            'kolicina' => 'required|integer|min:0',
+            'kolicina_na_stanju' => 'required|integer|min:0',
         ]);
 
         // Kreiranje proizvoda
         Proizvod::create([
             'naziv' => $request->naziv,
+            'opis' => $request->opis,
             'cena' => $request->cena,
-            'kolicina' => $request->kolicina,
+            'kolicina_na_stanju' => $request->kolicina_na_stanju,
         ]);
 
         return redirect()->route('proizvodi.index')
@@ -73,16 +75,18 @@ class ProizvodController extends Controller
         // Validacija
         $request->validate([
             'naziv' => 'required|string|max:255',
+            'opis' => 'required|string|max:255',
             'cena' => 'required|numeric|min:0',
-            'kolicina' => 'required|integer|min:0',
+            'kolicina_na_stanju' => 'required|integer|min:0',
         ]);
 
         // Update proizvoda
         $proizvod = Proizvod::findOrFail($id);
         $proizvod->update([
             'naziv' => $request->naziv,
+            'opis' => $request->opis,
             'cena' => $request->cena,
-            'kolicina' => $request->kolicina,
+            'kolicina_na_stanju' => $request->kolicina_na_stanju,
         ]);
 
         return redirect()->route('proizvodi.index')
