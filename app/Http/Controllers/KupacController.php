@@ -28,8 +28,10 @@ class KupacController extends Controller
     {
         $request->validate([
             'ime' => 'required|string|max:255',
+            'prezime' => 'required|string|max:255',
             'email' => 'required|email',
             'telefon' => 'required|string|max:50',
+            'adresa' => 'required|string|max:50',
         ]);
 
         Kupac::create($request->all());
@@ -42,35 +44,45 @@ class KupacController extends Controller
     /**
      * Display the specified resource.
      */
-    public function show(Kupac $kupac)
+    public function show($id)
     {
+        $kupac = Kupac::findOrFail($id);
         return view('kupci.show', compact('kupac'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(Kupac $kupac)
+    public function edit($id)
     {
+        $kupac = Kupac::findOrFail($id);
         return view('kupci.edit', compact('kupac'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, Kupac $kupac)
+    public function update(Request $request, $id)
     {
         $request->validate([
             'ime' => 'required|string|max:255',
+            'prezime' => 'required|string|max:255',
             'email' => 'required|email',
             'telefon' => 'required|string|max:50',
+            'adresa' => 'required|string|max:50',
         ]);
 
-        $kupac->update($request->all());
+        $kupac = Kupac::findOrFail($id);
+        $kupac->update([
+            'ime' => $request->ime,
+            'prezime' => $request->prezime,
+            'email' => $request->email,
+            'telefon' => $request->telefon,
+            'adresa' => $request->adresa,
+        ]);
 
-        return redirect()
-            ->route('kupci.index')
-            ->with('success', 'Podaci o kupcu su uspešno izmenjeni.');
+        return redirect()->route('kupci.index')
+                         ->with('success', 'Kupac je uspešno izmenjen.');
     }
 
     /**

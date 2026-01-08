@@ -35,9 +35,6 @@ Route::post('/korpa/ukloni/{id}', [KorpaController::class, 'ukloni'])
     ->name('korpa.remove');
 
 
-// Potvrda narudžbine – use case
-Route::post('/narudzbina/potvrdi', [NarudzbinaController::class, 'potvrdi']);
-
 
 require __DIR__.'/auth.php';
 
