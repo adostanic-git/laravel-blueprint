@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Kupac;
 use Illuminate\Http\Request;
 
 class KupacController extends Controller
@@ -11,7 +12,8 @@ class KupacController extends Controller
      */
     public function index()
     {
-        //
+        $kupci = Kupac::all();
+        return view('kupci.index', compact('kupci'));
     }
 
     /**
@@ -19,7 +21,7 @@ class KupacController extends Controller
      */
     public function create()
     {
-        //
+        return view('kupci.create');
     }
 
     /**
@@ -27,38 +29,62 @@ class KupacController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'ime' => 'required|string|max:255',
+            'email' => 'required|email',
+            'telefon' => 'required|string|max:50',
+        ]);
+
+        Kupac::create($request->all());
+
+        return redirect()
+            ->route('kupci.index')
+            ->with('success', 'Kupac je uspešno dodat.');
     }
 
     /**
      * Display the specified resource.
      */
-    public function show(string $id)
+    public function show(Kupac $kupac)
     {
-        //
+        return view('kupci.show', compact('kupac'));
     }
 
     /**
      * Show the form for editing the specified resource.
      */
-    public function edit(string $id)
+    public function edit(Kupac $kupac)
     {
-        //
+        return view('kupci.edit', compact('kupac'));
     }
 
     /**
      * Update the specified resource in storage.
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, Kupac $kupac)
     {
-        //
+        $request->validate([
+            'ime' => 'required|string|max:255',
+            'email' => 'required|email',
+            'telefon' => 'required|string|max:50',
+        ]);
+
+        $kupac->update($request->all());
+
+        return redirect()
+            ->route('kupci.index')
+            ->with('success', 'Podaci o kupcu su uspešno izmenjeni.');
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Kupac $kupac)
     {
-        //
+        $kupac->delete();
+
+        return redirect()
+            ->route('kupci.index')
+            ->with('success', 'Kupac je obrisan.');
     }
 }

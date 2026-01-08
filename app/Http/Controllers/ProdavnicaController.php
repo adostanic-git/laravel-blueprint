@@ -2,21 +2,26 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use App\Models\Proizvod;
+use Illuminate\Http\Request;
 
 class ProdavnicaController extends Controller
 {
- 
+    /**
+     * Prikaz svih proizvoda (prodavnica)
+     */
     public function index()
     {
-        $products = Proizvod::all();
-        return view('prodavnica.index', compact('products'));
+        $proizvodi = Proizvod::all();
+        return view('prodavnica.index', compact('proizvodi'));
     }
 
-    // Prikaz jednog proizvoda
+    /**
+     * Prikaz jednog proizvoda
+     */
     public function show($id)
     {
-        return view('prodavnica.show', compact('id'));
+        $proizvod = Proizvod::findOrFail($id);
+        return view('prodavnica.show', compact('proizvod'));
     }
 }

@@ -2,63 +2,95 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Dobavljac;
 use Illuminate\Http\Request;
 
 class DobavljacController extends Controller
 {
     /**
-     * Display a listing of the resource.
+     * Prikaz liste dobavljača
      */
     public function index()
     {
-        //
+        $dobavljaci = Dobavljac::all();
+        return view('dobavljaci.index', compact('dobavljaci'));
     }
 
     /**
-     * Show the form for creating a new resource.
+     * Forma za dodavanje novog dobavljača
      */
     public function create()
     {
-        //
+        return view('dobavljaci.create');
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Čuvanje novog dobavljača u bazi
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'naziv' => 'required|string|max:255',
+            'kontakt_osoba' => 'required|string|max:255',
+            'email' => 'required|email',
+            'telefon' => 'required|string|max:50',
+        ]);
+
+        Dobavljac::create($request->all());
+
+        return redirect()
+            ->route('dobavljaci.index')
+            ->with('success', 'Dobavljač je uspešno dodat.');
     }
 
     /**
-     * Display the specified resource.
+     * Prikaz jednog dobavljača
      */
-    public function show(string $id)
+    public function show($id)
     {
-        //
+        $dobavljac = Dobavljac::findOrFail($id);
+        return view('dobavljaci.show', compact('dobavljac'));
     }
 
     /**
-     * Show the form for editing the specified resource.
+     * Forma za izmenu dobavljača
      */
-    public function edit(string $id)
+    public function edit($id)
     {
-        //
+        $dobavljac = Dobavljac::findOrFail($id);
+        return view('dobavljaci.edit', compact('dobavljac'));
     }
 
     /**
-     * Update the specified resource in storage.
+     * Ažuriranje dobavljača
      */
-    public function update(Request $request, string $id)
+    public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'naziv' => 'required|string|max:255',
+            'kontakt_osoba' => 'required|string|max:255',
+            'email' => 'required|email',
+            'telefon' => 'required|string|max:50',
+        ]);
+
+        $dobavljac = Dobavljac::findOrFail($id);
+        $dobavljac->update($request->all());
+
+        return redirect()
+            ->route('dobavljaci.index')
+            ->with('success', 'Dobavljač je uspešno izmenjen.');
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Brisanje dobavljača
      */
-    public function destroy(string $id)
+    public function destroy($id)
     {
-        //
+        $dobavljac = Dobavljac::findOrFail($id);
+        $dobavljac->delete();
+
+        return redirect()
+            ->route('dobavljaci.index')
+            ->with('success', 'Dobavljač je uspešno obrisan.');
     }
 }

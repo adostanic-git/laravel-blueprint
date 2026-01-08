@@ -16,13 +16,22 @@ Route::get('/', function () {
 });
 
 // Prodavnica – pregled proizvoda od kruške
-Route::get('/prodavnica', [ProdavnicaController::class, 'index']);
-Route::get('/prodavnica/{id}', [ProdavnicaController::class, 'show']);
+Route::get('/prodavnica', [ProdavnicaController::class, 'index'])
+    ->name('prodavnica.index');
 
-// Korpa – use case rute
-Route::get('/korpa', [KorpaController::class, 'index']);
-Route::post('/korpa/dodaj/{id}', [KorpaController::class, 'dodaj']);
-Route::post('/korpa/ukloni/{id}', [KorpaController::class, 'ukloni']);
+Route::get('/prodavnica/{id}', [ProdavnicaController::class, 'show'])
+    ->name('prodavnica.show');
+
+// Korpa – upravljanje korpom
+Route::get('/korpa', [KorpaController::class, 'index'])
+    ->name('korpa.index');
+
+Route::post('/korpa/dodaj/{id}', [KorpaController::class, 'dodaj'])
+    ->name('korpa.add');
+
+Route::post('/korpa/ukloni/{id}', [KorpaController::class, 'ukloni'])
+    ->name('korpa.remove');
+
 
 // Potvrda narudžbine – use case
 Route::post('/narudzbina/potvrdi', [NarudzbinaController::class, 'potvrdi']);
