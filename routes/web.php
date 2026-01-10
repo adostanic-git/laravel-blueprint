@@ -63,7 +63,7 @@ Route::middleware(['auth', 'verified'])->group(function () {
     Route::resource('/narudzbine', NarudzbinaController::class);
 
     // Obrada narudžbine – admin use case
-    Route::post('/narudzbine/{id}/obradi',
-        [NarudzbinaController::class, 'obradi']
+    Route::post('/narudzbine/{id}/edit',
+        [NarudzbinaController::class, 'edit']
     );
 });
