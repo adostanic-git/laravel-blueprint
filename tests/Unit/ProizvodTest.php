@@ -7,7 +7,7 @@ use App\Models\Proizvod;
 
 class ProizvodUnitTest extends TestCase
 {
-    /** @test */
+
     public function proizvod_moze_biti_instanciran()
     {
         $proizvod = new Proizvod();
@@ -15,7 +15,7 @@ class ProizvodUnitTest extends TestCase
         $this->assertInstanceOf(Proizvod::class, $proizvod);
     }
 
-    /** @test */
+
     public function proizvod_ima_osnovna_polja()
     {
         $proizvod = new Proizvod();

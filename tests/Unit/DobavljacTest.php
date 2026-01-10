@@ -7,7 +7,7 @@ use App\Models\Dobavljac;
 
 class DobavljacUnitTest extends TestCase
 {
-    /** @test */
+
     public function dobavljac_moze_biti_instanciran()
     {
         $dobavljac = new Dobavljac();
@@ -15,7 +15,6 @@ class DobavljacUnitTest extends TestCase
         $this->assertInstanceOf(Dobavljac::class, $dobavljac);
     }
 
-    /** @test */
     public function dobavljac_ima_osnovna_polja()
     {
         $dobavljac = new Dobavljac();
